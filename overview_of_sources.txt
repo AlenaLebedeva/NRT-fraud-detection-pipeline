@@ -1,0 +1,14 @@
+# Обзор источников
+
+1. https://nuancesprog.ru/p/17175/ - пример архитектуры, которую можно адаптировать и оценить (инструменты: Kafka + ClickHouse, Materialized View)
+2. https://stripe.dev/blog/real-time-payment-analytics-stripe-to-aws-data-pipeline - пример практической реализации в индустрии (инструменты: AWS-стэк, можно сравнить с инструментами из предыдущего шага; проблемы масштабирования, требования к пропускной способности)
+3. https://github.com/KashaniKasra/Real-time-Payment-Data-Pipeline-with-Kafka - пример практического применения (в коде можно найти метрики)
+4. https://hazelcast.com/use-cases/payment-processing/ - актуальность темы + исторические данные
+5. https://hevodata.com/learn/understanding-data-pipeline-architecture/ - теоретические данные + сравнительная таблица
+6. https://habr.com/ru/companies/otus/articles/757098/ - теоретические данные (базовые)
+7. https://bigdataschool.ru/blog/kafka-and-spark-streaming-for-financial-transactions/ - выбор инструментов, основные проблемы и пути их решения (+ метрики)
+8. https://datafinder.ru/products/arhitektura-konveyerov-dannyh-polnoe-rukovodstvo-po-vyboru-i-realizacii - введение + артефакты
+
+# Источник данных
+
+Датасет на Kaggle: https://www.kaggle.com/datasets/mdhossanr/financial-transactions-dataset-for-analysis
