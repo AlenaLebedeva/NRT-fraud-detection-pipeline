@@ -29,4 +29,4 @@
 
 ## Сервис
 
-В папке payment-pipeline представлена схема будущего сервиса, которая включает в себя ноутбуки, модели, FastAPI и модели
+В папке [payment-pipeline](https://github.com/AlenaLebedeva/hse_abd_final_qualifying_work/tree/e78145365aec4dc0cf1d63d0c62965b63821ad89/payment-pipeline) представлена схема будущего сервиса, которая включает в себя ноутбуки, модели, FastAPI и модели
