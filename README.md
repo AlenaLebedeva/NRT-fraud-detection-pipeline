@@ -56,7 +56,7 @@
 | Balanced RF | 0.700 | 0.064 | 0.118 | 0.779 |
 
 *Высокая полнота, но очень низкая точность – 93% ложных срабатываний.*
-- Ссылка на ноутбук с baseline: [final_project_baseline_metrics.ipynb](https://github.com/AlenaLebedeva/hse_abd_final_qualifying_work/blob/e7c765a456b52cdc32ed1ba504bd72ad77fb6e37/payment-pipeline/src/notebooks/final_project_baseline_metrics.ipynb)
+- Ссылка на ноутбук с baseline: [`final_project_baseline_metrics.ipynb`](payment-pipeline/src/notebooks/final_project_baseline_metrics.ipynb)
 
 ### Улучшенные модели (SMOTE)
 
@@ -76,7 +76,7 @@
 - Gradient Boosting – лучший **баланс** (precision 0.63, recall 0.33) → для вывода на проверку оператором.
 - Улучшение F1-score относительно базовой линии: **+310%**.
 
-**Ноутбук:** [`notebooks/final_project_improvements.ipynb`](payment-pipeline/src/notebooks/final_project_improvements.ipynb)
+**Ноутбук:** [`final_project_improvements.ipynb`](payment-pipeline/src/notebooks/final_project_improvements.ipynb)
 
 ## Сервис
 
