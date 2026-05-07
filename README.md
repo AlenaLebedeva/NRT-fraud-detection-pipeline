@@ -22,10 +22,61 @@
 - Описание: синтетический датасет, содержащий 37 417 транзакций с информацией об идентификаторах счетов, типе операции, сумме, балансе и временных метках.
 - Ноутбук с EDA: [`EDA_final_project.ipynb`](EDA_final_project.ipynb) — разведочный анализ данных, включая визуализации и выводы.
 
+## EDA и feature engineering
+
+- Пропуски и дубликаты отсутствуют.
+- Типы транзакций: deposit, withdrawal, payment, transfer (равномерно, ~25% каждый).
+- Суммы и балансы распределены почти равномерно.
+- Линейные корреляции между признаками отсутствуют → необходимы нелинейные модели.
+- Медианный интервал между транзакциями ~1,5 часа.
+
+**Создано 13 признаков**, включая:
+- базовые (TransactionAmount, AccountBalance, hour, day_of_week, weekend, amount_zscore)
+- статистические (balance_ratio, is_large)
+- циклические (hour_sin, hour_cos)
+- агрегированные (rolling_mean_amount, rolling_std_amount)
+
+**Целевая переменная** `is_anomaly`:  
+логическое ИЛИ статистической аномалии (`|z-score| > 2.5`) и временной аномалии (`time_since_last < 300 сек`).  
+Доля аномалий искусственно увеличена с 0.18% до 2% (748 из 37417) тремя типами синтеза:
+- крупные суммы (×3–5)
+- высокая частота (<60 сек)
+- резкое снижение баланса (на 70–90%)
+
 ## Модель
 
-- После проведенной работы был выбран RandomForest с параметрами: {'class_weight': 'balanced', 'max_depth': 5, 'min_samples_leaf': 2, 'min_samples_split': 5, 'n_estimators': 50}. Данная модель показала наилучшее качество. В качестве метрик выбраны recall, precision, F1-score и ROC-AUC
+### Базовые модели
+
+- **Random Forest** (`class_weight='balanced'`, `n_estimators=50`, `max_depth=5`)
+- **Balanced Random Forest** (из `imbalanced-learn`)
+
+| Модель | Recall | Precision | F1 | ROC-AUC |
+|--------|--------|-----------|----|---------|
+| Baseline RF | 0.647 | 0.066 | 0.120 | 0.783 |
+| Balanced RF | 0.700 | 0.064 | 0.118 | 0.779 |
+
+*Высокая полнота, но очень низкая точность – 93% ложных срабатываний.*
 - Ссылка на ноутбук с baseline: [final_project_baseline_metrics.ipynb](https://github.com/AlenaLebedeva/hse_abd_final_qualifying_work/blob/e7c765a456b52cdc32ed1ba504bd72ad77fb6e37/payment-pipeline/src/notebooks/final_project_baseline_metrics.ipynb)
+
+### Улучшенные модели (SMOTE)
+
+Применена техника **SMOTE** (Synthetic Minority Over-sampling) для балансировки классов до 10% аномалий в обучающей выборке.
+
+Сравнены 9 моделей. Лучшие результаты:
+
+| Модель | Precision | Recall | F1 | ROC-AUC |
+|--------|-----------|--------|----|---------|
+| **Random Forest + SMOTE** | **1.000** | 0.327 | **0.492** | 0.785 |
+| Gradient Boosting (без SMOTE) | 0.628 | 0.327 | 0.430 | 0.783 |
+| XGBoost + SMOTE | 0.977 | 0.280 | 0.435 | 0.731 |
+
+**Ключевые выводы:**
+- SMOTE кардинально повышает точность (до 100% у RF+SMOTE) ценой умеренного снижения полноты (до 33%).
+- RF+SMOTE – **идеальная точность** (ни одного ложного срабатывания) → для сценария автоматической блокировки.
+- Gradient Boosting – лучший **баланс** (precision 0.63, recall 0.33) → для вывода на проверку оператором.
+- Улучшение F1-score относительно базовой линии: **+310%**.
+
+**Ноутбук:** [`notebooks/final_project_improvements.ipynb`](payment-pipeline/src/notebooks/final_project_improvements.ipynb)
 
 ## Сервис
 
