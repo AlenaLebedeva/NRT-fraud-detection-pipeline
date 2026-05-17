@@ -128,6 +128,6 @@ payment-pipeline/
 - Применение SMOTE на реальных данных привело к переобучению – важное наблюдение для будущих исследований.
 
 ## Ссылки
-- Текст диплома: [Диплом.docx]
-- Презентация: [ВКР.pptx]
-- Ноутбуки: в папке [payment-pipeline/src/notebooks]
+- Текст диплома:  [`Диплом.docx`](Диплом.docx)
+- Презентация: [`ВКР.pptx`](ВКР.pptx)
+- Ноутбуки: в папке [`payment-pipeline/src/notebooks`](payment-pipeline/src/notebooks)
