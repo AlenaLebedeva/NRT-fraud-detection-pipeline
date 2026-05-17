@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from src.api.models import StatsResponse
-from src.database import get_db
+from src.api.database import get_db
 
 router = APIRouter()
 

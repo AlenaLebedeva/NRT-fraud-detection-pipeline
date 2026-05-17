@@ -7,7 +7,12 @@ class Transaction(BaseModel):
     Timestamp: datetime
     TransactionType: str
     TransactionAmount: float
-    AccountBalance: float
+    AccountBalance: float = 0.0
+    OldBalanceOrg: float = 0.0
+    NewBalanceOrig: float = 0.0
+    OldBalanceDest: float = 0.0
+    NewBalanceDest: float = 0.0
+    Step: int = 0
 
 class PredictionResponse(BaseModel):
     transaction_id: int
