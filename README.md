@@ -35,9 +35,9 @@
 ## Структура репозитория
 payment-pipeline/
 ├── src/
-│ ├── api/ # FastAPI (endpoints, models, database)
-│ ├── models/ # Обученные модели (best_model_real.pkl)
-│ └── notebooks/ # Jupyter ноутбуки с EDA и экспериментами
+│   ├── api/ # FastAPI (endpoints, models, database)
+│   ├── models/ # Обученные модели (best_model_real.pkl)
+│   └── notebooks/ # Jupyter ноутбуки с EDA и экспериментами
 ├── frontend/ # Streamlit UI (app.py)
 ├── data/ # SQLite база (создаётся автоматически)
 ├── requirements.txt # Зависимости Python
