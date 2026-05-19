@@ -33,6 +33,7 @@
 - **Генератор потока транзакций** для имитации NRT-нагрузки.
 
 ## Структура репозитория
+<pre>
 payment-pipeline/
 ├── src/
 │   ├── api/               # FastAPI (endpoints, models, database)
@@ -43,7 +44,8 @@ payment-pipeline/
 ├── requirements.txt       # Зависимости Python
 ├── generator.py           # Скрипт для генерации потока транзакций
 └── README.md
-
+</pre>
+  
 ## Данные
 
 ### 1. Синтетический датасет (отработка методологии)
