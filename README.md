@@ -56,7 +56,7 @@
 
 ---
 
-## 🚀 Запуск
+## Запуск
 
 ```bash
 # 1. Установка зависимостей
@@ -70,4 +70,43 @@ streamlit run frontend/app.py
 
 # 4. (Опционально) Генератор потока транзакций
 python generator.py
+```
 
+Документация API автоматически доступна по адресу: http://127.0.0.1:8000/docs
+
+## Структура репозитория
+<pre>
+payment-pipeline/
+├── src/
+│   ├── api/               # FastAPI (endpoints, models, database)
+│   ├── models/            # Обученные модели (best_model_real.pkl)
+│   └── notebooks/         # Jupyter ноутбуки с EDA и экспериментами
+├── frontend/              # Streamlit UI (app.py)
+├── data/                  # SQLite база (создаётся автоматически)
+├── requirements.txt       # Зависимости Python
+├── generator.py           # Скрипт для генерации потока транзакций
+└── README.md
+</pre>
+  
+## Данные
+
+### 1. Синтетический датасет (отработка методологии)
+- **Источник:** [Financial Transactions Dataset for Analysis](https://www.kaggle.com/datasets/mdhossanr/financial-transactions-dataset-for-analysis) (Kaggle)
+- **Размер:** 37 417 транзакций
+- **Целевая переменная:** создана искусственно (z-score > 2.5 или интервал < 300 сек), доля аномалий увеличена до 2%.
+
+### 2. Реальный датасет (апробация)
+- **Источник:** [Online Payments Fraud Detection](https://www.kaggle.com/datasets/rupakroy/online-payments-fraud-detection-dataset) (Kaggle)
+- **Размер:** 6 362 620 транзакций
+- **Доля мошенничества:** 0.13% (естественный сильный дисбаланс)
+- **Целевая переменная:** `isFraud` (готовая метка)
+
+### Тестирование производительности
+- Пропускная способность: до 800 запросов/сек
+- Средняя задержка: < 50 мс
+- Сохранение истории: все транзакции записываются в SQLite
+
+## Результаты
+- Лучшая модель для production Random Forest (без SMOTE) на реальном датасете: F1=0.855, Precision=0.973, Recall=0.763.
+- Разработанный конвейер готов к промышленной эксплуатации (API, UI, генератор, хранилище).
+- Применение SMOTE на реальных данных привело к переобучению – важное наблюдение для будущих исследований.
