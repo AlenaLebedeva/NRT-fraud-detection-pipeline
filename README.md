@@ -24,9 +24,8 @@
 
 ## Архитектура
 
-Генератор/Клиент → FastAPI (/predict) → Random Forest → SQLite ← Streamlit UI
-↓
-Ответ (аномалия + вероятность)
+- Запрос: Генератор/Клиент → FastAPI (/predict) → Random Forest → SQLite
+- Ответ: Аномалия + вероятность → клиенту
 
 
 ### Стек технологий
